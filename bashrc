@@ -2,24 +2,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-PROMPT_COMMAND='history -a >(tee -a ~/.bash_history | logger -t "$USER[$$] $SSH_CONNECTION")'
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-#HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
-# ... or force ignoredups and ignorespace
-HISTCONTROL=erasedups:ignoreboth
-#HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTFILESIZE=500000
-HISTSIZE=100000
+# Save and reload the history after each command finishes
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # ignore exit commands
 HISTIGNORE="&:[ ]*:exit"
@@ -30,16 +22,12 @@ shopt -s cmdhist
 # Set the default editor to vim.
 export EDITOR=vim
  
-# Append commands to the history every time a prompt is shown,
-# instead of after closing the session.
-PROMPT_COMMAND='history -a'
- 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
@@ -77,7 +65,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\h: \w\a\]$PS1"
     ;;
 *)
     ;;
@@ -87,18 +75,18 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -116,67 +104,61 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# add the __git_ps1 command to PS1 
 PS1='\[\e]2;[bash]   \h::\]$PWD\[\a\]\[\e]1;\]$(basename "$(dirname "$PWD")")/\W\[\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;33m\]\w\[\e[00m\]$(__git_ps1 2>/dev/null) \$ '
-export JAVA_HOME=/usr/lib/jvm/java-6-sun/
+PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\h: \w\a\]$PS1"
+
+if [[ "$(uname)" == "Linux" ]]; then
+    export JAVA_HOME=/usr/lib/jvm/java-6-sun/
+    # add the __git_ps1 command to PS1 
+    man $(ls /usr/bin | shuf -n 1)| sed -n "/^NAME/ { n;p;q }"
+else
+    # brew bash completion:
+    if [ -f `brew --prefix`/etc/bash_completion ]; then
+      . `brew --prefix`/etc/bash_completion
+    fi
+    if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
+        . `brew --prefix`/etc/bash_completion.d/git-completion.bash
+    fi
+
+    # Initialize FINK if needed
+
+    if [[ ! -x $(which fink) && -d /sw/bin ]];then
+      source /sw/bin/init.sh
+    fi
 
 
-# brew bash completion:
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
-fi
+    # Set the DISPLAY variable ONLY for OS X earlier than 10.5
+    # Do not set it for 10.5, or it will create problems.
 
 
-# Initialize FINK if needed
-
-if [[ ! -x $(which fink) && -d /sw/bin ]];then
-  source /sw/bin/init.sh
-fi
-
-
-# Set the DISPLAY variable ONLY for OS X earlier than 10.5
-# Do not set it for 10.5, or it will create problems.
-
-
-if [[ -z $DISPLAY && $(sw_vers -productVersion) < 10.5  && -z $SSH_CONNECTION ]]; then
-  # -- works for Apple X11 with Fast User Switching
-  disp_no=($( ps -awx | grep -F X11.app | awk '{print $NF}' | grep -e ":[0-9]"  ))
-  if [[ -n $disp_no ]];then
-    export DISPLAY=${disp_no}.0
-  else
-    export DISPLAY=:0.0
-  fi
-  echo "DISPLAY has been set to $DISPLAY"
+    if [[ -z $DISPLAY && $(sw_vers -productVersion) < 10.5  && -z $SSH_CONNECTION ]]; then
+      # -- works for Apple X11 with Fast User Switching
+      disp_no=($( ps -awx | grep -F X11.app | awk '{print $NF}' | grep -e ":[0-9]"  ))
+      if [[ -n $disp_no ]];then
+        export DISPLAY=${disp_no}.0
+      else
+        export DISPLAY=:0.0
+      fi
+      echo "DISPLAY has been set to $DISPLAY"
+    fi
 fi
 
 ### tail logs
 function tt {
-(
-cd /usr/local/tomcat/logs
-if [[ $# -eq 0 ]]; then
-  tail -F -n0 cc.out cc_core.out palomar_latest.out catalina.out
-else
-  tail -F -n0 $@
-fi
-)
+    (
+        cd /usr/local/tomcat/logs
+        if [[ $# -eq 0 ]]; then
+          tail -F -n0 cc.out cc_core.out palomar_latest.out catalina.out
+        else
+          tail -F -n0 $@
+        fi
+    )
 }
 
 function _complete_tt {
-local log_dir=/usr/local/tomcat/logs/
-local logs=$(cd $log_dir; ls)
-COMPREPLY=($(compgen -W "$logs" -- [))
+    local log_dir=/usr/local/tomcat/logs/
+    local logs=$(cd $log_dir; ls)
+    COMPREPLY=($(compgen -W "$logs" -- [))
 }
 complete -F _complete_tt tt]
 
-
-# iTerm Tab and Title Customization and prompt customization
-
-# Put the string " [bash]   hostname::/full/directory/path"
-# in the title bar using the command sequence
-# \[\e]2;[bash]   \h::\]$PWD\[\a\]
-
-# Put the penultimate and current directory 
-# in the iterm tab
-# \[\e]1;\]$(basename $(dirname $PWD))/\W\[\a\]
-
-#man $(ls /usr/bin | shuf -n 1)| sed -n "/^NAME/ { n;p;q }"

@@ -1,23 +1,23 @@
 #!/bin/bash
 
 ## move all files to .bak extenstions
-mv	~/.bash_aliases	~/.bash_aliases.bak
-mv	~/.bash_logout	~/.bash_logout.bak
-mv	~/.bashrc   	~/.bashrc.bak
-mv	~/.vim_runtime	~/.vim_runtime.bak
-mv	~/.viminfo	   	~/.viminfo.bak
-mv	~/.vimrc	   	~/.vimrc.bak
+mv -v	~/.bash_aliases	~/.bash_aliases.bak
+mv -v	~/.bash_logout	~/.bash_logout.bak
+mv -v	~/.bashrc   	~/.bashrc.bak
+mv -v	~/.vim_runtime	~/.vim_runtime.bak
+mv -v	~/.viminfo	~/.viminfo.bak
+mv -v	~/.vimrc	~/.vimrc.bak
 
 ## link all files to proper places
-ln	-s	bash_aliases	~/.bash_aliases
-ln	-s	bash_logout 	~/.bash_logout
-ln	-s	bashrc		    ~/.bashrc
-ln	-s	vim_runtime	    ~/.vim_runtime
-ln	-s	viminfo		    ~/.viminfo
-ln	-s	vimrc		    ~/.vimrc
+ln	-vs	$PWD/bash_aliases	~/.bash_aliases
+ln	-vs	$PWD/bash_logout 	~/.bash_logout
+ln	-vs	$PWD/bashrc	~/.bashrc
+ln	-vs	$PWD/vim_runtime	~/.vim_runtime
+ln	-vs	$PWD/viminfo	~/.viminfo
+ln	-vs	$PWD/vimrc		~/.vimrc
 
 ## reset the terminal
 source ~/.bashrc
 
 ## install ultimate vimrc
-sh ./vim_runtime/install_awesome_vimrc.sh
+sh ~/.vim_runtime/install_awesome_vimrc.sh
