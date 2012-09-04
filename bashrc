@@ -55,11 +55,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -104,7 +99,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-PS1='\[\e]2;[bash]   \h::\]$PWD\[\a\]\[\e]1;\]$(basename "$(dirname "$PWD")")/\W\[\a\]\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;33m\]\w\[\e[00m\]$(__git_ps1 2>/dev/null) \$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 2>/dev/null) \$' 
 PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\h: \w\a\]$PS1"
 
 if [[ "$(uname)" == "Linux" ]]; then
@@ -162,3 +157,5 @@ function _complete_tt {
 }
 complete -F _complete_tt tt]
 
+## add deploy to path
+export PATH=$PATH:/home/pwinters/workspace/deploy
