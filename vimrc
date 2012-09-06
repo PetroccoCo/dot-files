@@ -1,16 +1,6 @@
-set runtimepath+=~/.vim_runtime
+set runtimepath+=~/.vim_syntax
 
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
-
-try
-source ~/.vim_runtime/my_configs.vim
-catch
-endtry
-
-" actionscript language
+" actionscript language ctags settings
 let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
 
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)

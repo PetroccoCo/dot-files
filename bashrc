@@ -138,7 +138,15 @@ else
     fi
 fi
 
+## bell and email functions
+function bell { echo -e "\a"; }
+function ebell { bell; }
+## This is intended to check the state of the vc server
+function vc_stat { psql -U tomcat readytalk -c "SELECT * from external_services;"; ps aux | grep red5; }
+      
 ### tail logs
+function ttvc { tail -F -n 100 /usr/local/red5/log/red5*; }
+
 function tt {
     (
         cd /usr/local/tomcat/logs
