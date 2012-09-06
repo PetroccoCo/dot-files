@@ -10,6 +10,9 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
+" actionscript language
+let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
+
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline)
     let isfirst = 1
