@@ -1,3 +1,9 @@
+
+" EVERYTHING PRIOR TO THIS POINT IS ADDED BY git://github.com/amix/vimrc.git using the ultimate install script!
+"
+" EVERYTHING AFTER THIS POINT IS IN THE dot_files/vimrc file
+
+" Add the syntax files and such
 set runtimepath+=~/.vim_syntax
 
 " actionscript language ctags settings
