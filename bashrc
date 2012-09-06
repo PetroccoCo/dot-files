@@ -9,7 +9,7 @@ export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
-
+export HISTTIMEFORMAT
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
@@ -139,8 +139,14 @@ else
 fi
 
 ## bell and email functions
-function bell { echo -e "\a"; }
-function ebell { bell; history | tail -n 10 | mail -s "Command finished with status: $?" pete.winterscheidt@readytalk.com }
+function ebell { 
+    echo -ne "\a";
+    OLD=`sed -e '1{$d;}' -e '$!{h;d;}' -e x -e 's/#//' ~/.bash_history`;
+    NEW=`date +%s`;
+    if [[ $((NEW-OLD)) -gt 120 ]]; then
+      history | tail -n 10 | mail -s "Command finished with status: $?" pete.winterscheidt@readytalk.com;
+    fi
+}
 
 ## This is intended to check the state of the vc server
 function vc_stat { psql -U tomcat readytalk -c "SELECT * from external_services;"; ps aux | grep red5; }
