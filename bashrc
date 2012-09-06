@@ -140,7 +140,8 @@ fi
 
 ## bell and email functions
 function bell { echo -e "\a"; }
-function ebell { bell; }
+function ebell { bell; history | tail -n 10 | mail -s "Command finished with status: $?" pete.winterscheidt@readytalk.com }
+
 ## This is intended to check the state of the vc server
 function vc_stat { psql -U tomcat readytalk -c "SELECT * from external_services;"; ps aux | grep red5; }
       
