@@ -7,3 +7,7 @@
 	ff = false
 	tool = vimdiff
 	keepBackup = false
+[init]
+	templatedir = ~/.git_template
+[alias]
+	ctags = !.git/hooks/ctags

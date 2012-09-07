@@ -14,6 +14,7 @@ mv -v	~/.vimrc	~/.vimrc.bak
 mv -v	~/.ctags	~/.ctags.bak
 mv -v	~/.cvsignore	~/.cvsignore.bak
 mv -v	~/.gitconfig	~/.gitconfig.bak
+mv -v	~/.git_template	~/.git_template.bak
 
 ## link all files to proper places
 ln	-vs	$PWD/bash_aliases	~/.bash_aliases
@@ -25,6 +26,7 @@ ln	-vs	$PWD/viminfo	~/.viminfo
 ln	-vs	$PWD/ctags		~/.ctags
 ln	-vs	$PWD/cvsignore		~/.cvsignore
 ln	-vs	$PWD/gitconfig		~/.gitconfig
+ln	-vs	$PWD/git_template		~/.git_template
 
 ## Don't link this as it is overwritten by the install_awesome_vimrc.sh
 #ln	-vs	$PWD/vimrc		~/.vimrc
