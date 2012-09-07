@@ -5,16 +5,16 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
+export HISTCONTROL=erasedups  # no duplicate entries
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
-export HISTTIMEFORMAT
+export HISTTIMEFORMAT=""
 # Save and reload the history after each command finishes
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # ignore exit commands
-HISTIGNORE="&:[ ]*:exit"
+HISTIGNORE="fg:bg:git pull:git log:git diff:ls:ls -l:ls -ls:&:[ ]*:exit"
 
 # enable cmdhist
 shopt -s cmdhist
