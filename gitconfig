@@ -1,0 +1,9 @@
+[core]
+	excludesfile = ~/.cvsignore
+[user]
+	email = pete.winterscheidt@readytalk.com
+	name = Pete Winterscheidt
+[merge]
+	ff = false
+	tool = vimdiff
+	keepBackup = false

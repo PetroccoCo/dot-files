@@ -301,7 +301,7 @@ endif
 
 syn keyword xmlDocTypeKeyword contained DOCTYPE PUBLIC SYSTEM
 syn region  xmlInlineDTD contained matchgroup=xmlDocTypeDecl start="\[" end="]" contains=@xmlDTD
-runtime ! vimrcs/dtd.vim
+runtime ! dtd.vim
 if exists("b:current_syntax")
 	unlet b:current_syntax
 endif

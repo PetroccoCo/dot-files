@@ -3,8 +3,12 @@
 "
 " EVERYTHING AFTER THIS POINT IS IN THE dot_files/vimrc file
 
+" Have pathogen infect the bundle directory
+call pathogen#infect('~/vim/bundle')
+
 " Add the syntax files and such
-set runtimepath+=~/.vim_syntax
+set runtimepath+=~/.vim/syntax
+source ~/.vim/syntax/filetypes.vim
 
 " actionscript language ctags settings
 let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:variable'
@@ -34,8 +38,11 @@ function! s:RunShellCommand(cmdline)
     1
 endfunction
 
-
+" Set my prefferred spacing settings at the end so nothing overwrites them
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+
+" Add my workspace to the path (done in the install.sh script)
+
