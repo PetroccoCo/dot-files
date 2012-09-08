@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## vim-fugitive has a habit of using absolute paths
+echo "gitdir: ../../../.git/modules/vim/bundle/vim-fugitive" > ./vim/bundle/vim-fugitive/.git
+
 ## ensure all submodules are current and pulled in
 git submodule update --init --recursive
 
