@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+EMAIL_ADDR="pete.winterscheidt@readytalk.com"
+EBELL_TIMEOUT=180
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -143,8 +146,8 @@ function ebell {
     echo -ne "\a";
     OLD=`sed -e '1{$d;}' -e '$!{h;d;}' -e x -e 's/#//' ~/.bash_history`;
     NEW=`date +%s`;
-    if [[ $((NEW-OLD)) -gt 120 ]]; then
-      history | tail -n 10 | mail -s "Command finished with status: $?" pete.winterscheidt@readytalk.com;
+    if [[ $((NEW-OLD)) -gt $EBELL_TIMEOUT ]]; then
+      history | tail -n 10 | mail -s "Command finished with status: $? in $((NEW-OLD)) milliseconds" $EMAIL_ADDR;
     fi
 }
 
