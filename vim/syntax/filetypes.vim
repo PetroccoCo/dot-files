@@ -11,3 +11,8 @@ au! Syntax mxml source ~/.vim/syntax/mxml.vim
 """"""""""""""""""""""""""""""
 au BufNewFile,BufRead *.gradle setf groovy
 
+""""""""""""""""""""""""""""""
+" => Apache and other logs section
+""""""""""""""""""""""""""""""
+au! Syntax httplog source ~/.vim/syntax/apachelogs.vim
+au BufRead *.log setf httplog 

@@ -3,7 +3,7 @@
 # for examples
 
 EMAIL_ADDR="pete.winterscheidt@readytalk.com"
-EBELL_TIMEOUT=180
+EBELL_TIMEOUT=1000*60*3         # 3 minutes in milliseconds
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return

@@ -322,7 +322,7 @@ endif
 syn keyword mxmlSpecialTagName  contained mx:Script mx:Style
 if main_syntax != 'actionscript' || exists("actionscript")
   " JAVA SCRIPT
-  syn include @mxmlScript vimrcs/actionscript.vim
+  syn include @mxmlScript actionscript.vim
   if exists("b:current_syntax")
 	  unlet b:current_syntax
   endif
