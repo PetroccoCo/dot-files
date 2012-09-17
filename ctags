@@ -1,4 +1,4 @@
--langdef=actionscript
+--langdef=actionscript
 --langmap=actionscript:.as.mxml
 --extra=+fq
 --regex-actionscript=/^[ \t]*package[ \t]+([A-Za-z0-9_.]+)[ \t]*/\1/a<Plug>PeepOpenackage<Plug>PeepOpenackages/

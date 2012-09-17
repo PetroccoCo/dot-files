@@ -3,6 +3,12 @@
 "
 " EVERYTHING AFTER THIS POINT IS IN THE dot_files/vimrc file
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Override the Fast editing and reloading of vimrc configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>e :e! ~/dot-files/vimrc<cr>
+autocmd! bufwritepost vimrc source ~/.vimrc
+
 " Have pathogen infect the bundle directory
 call pathogen#infect('~/vim/bundle')
 

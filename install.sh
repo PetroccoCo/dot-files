@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ## vim-fugitive has a habit of using absolute paths
-echo "gitdir: ../../../.git/modules/vim/bundle/vim-fugitive" > ./vim/bundle/vim-fugitive/.git
+## the solution appears to be, blow it away and have git recreate it
+rm -r ./vim/bundle/vim-fugitive/.git
 
 ## ensure all submodules are current and pulled in
 git submodule update --init --recursive
@@ -10,6 +11,7 @@ git submodule update --init --recursive
 mv -v	~/.bash_aliases	~/.bash_aliases.bak
 mv -v	~/.bash_logout	~/.bash_logout.bak
 mv -v	~/.bashrc   	~/.bashrc.bak
+mv -v	~/.bash_profile   	~/.bash_profile.bak
 mv -v	~/.vim_runtime	~/.vim_runtime.bak
 mv -v	~/.vim          ~/.vim.bak
 mv -v	~/.viminfo	~/.viminfo.bak
@@ -23,6 +25,7 @@ mv -v	~/.git_template	~/.git_template.bak
 ln	-vs	$PWD/bash_aliases	~/.bash_aliases
 ln	-vs	$PWD/bash_logout 	~/.bash_logout
 ln	-vs	$PWD/bashrc	~/.bashrc
+ln	-vs	$PWD/bash_profile	~/.bash_profile
 ln	-vs	$PWD/vim_runtime	~/.vim_runtime
 ln	-vs	$PWD/vim  ~/.vim
 ln	-vs	$PWD/viminfo	~/.viminfo
