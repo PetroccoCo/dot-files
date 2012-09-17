@@ -143,12 +143,15 @@ fi
 
 ## bell and email functions
 function ebell { 
-    echo -ne "\a";
-    OLD=`sed -e '1{$d;}' -e '$!{h;d;}' -e x -e 's/#//' ~/.bash_history`;
-    NEW=`date +%s`;
+  echo -ne "\a";
+  OLD=`sed -e '1{$d;}' -e '$!{h;d;}' -e x -e 's/#//' ~/.bash_history`;
+  NEW=`date +%s`;
+  # This tests if $OLD is a number, our methods are not perfect..
+  if [ $OLD -eq $OLD 2> /dev/null ]; then
     if [[ $((NEW-OLD)) -gt $EBELL_TIMEOUT ]]; then
       history | tail -n 10 | mail -s "Command finished with status: $? in $((NEW-OLD)) milliseconds" $EMAIL_ADDR;
     fi
+  fi
 }
 
 ## This is intended to check the state of the vc server
