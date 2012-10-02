@@ -11,3 +11,5 @@
 	templatedir = ~/.git_template
 [alias]
 	ctags = !.git/hooks/ctags
+[mergetool]
+	keepBackup = false

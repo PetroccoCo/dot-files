@@ -7,3 +7,6 @@ alias pull='git pull'
 
 ## Logs
 alias red5log='tail -f /usr/local/red5/log/red5_local.0'
+
+## Color by default
+alias less='less -R'
