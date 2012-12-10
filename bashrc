@@ -186,4 +186,6 @@ function _complete_tt {
 complete -F _complete_tt tt]
 
 ## add deploy to path
+homebrew=/usr/local/bin:/usr/local/sbin
+export PATH=$homebrew:$PATH
 export PATH=$PATH:/home/pwinters/workspace/deploy
