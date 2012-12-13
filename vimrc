@@ -51,4 +51,6 @@ set softtabstop=2
 set expandtab
 
 " Add my workspace to the path (done in the install.sh script)
-
+" These enable per dir .vimrc
+set exrc            " enable per-directory .vimrc files
+set secure          " disable unsafe commands in local .vimrc files
