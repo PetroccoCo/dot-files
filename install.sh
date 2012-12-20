@@ -48,4 +48,4 @@ sh ~/.vim_runtime/install_awesome_vimrc.sh
 ## Append to the vimrc so we can have everything co-exist nicely
 cat vimrc >> ~/.vimrc
 ## Aod all src directories to the vim path for easy finding
-find ~/workspace/ -maxdepth 2 -path "*src" -type d | sed -e 's/.*/set path +=\0\/**/' >> ~/.vimrc
+#find ~/workspace/ -maxdepth 2 -path "*src" -type d | sed -e 's/.*/set path +=\0\/**/' >> ~/.vimrc
