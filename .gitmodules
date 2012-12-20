@@ -10,3 +10,6 @@
 [submodule "vim/bundle/local-vimrc"]
 	path = vim/bundle/local-vimrc
 	url = git://github.com/MarcWeber/vim-addon-local-vimrc.git
+[submodule "vim/bundle/tabular"]
+	path = vim/bundle/tabular
+	url = git://github.com/godlygeek/tabular.git
