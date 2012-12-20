@@ -10,7 +10,8 @@ map <leader>e :e! ~/dot-files/vimrc<cr>
 autocmd! bufwritepost vimrc source ~/.vimrc
 
 " Have pathogen infect the bundle directory
-call pathogen#infect('~/vim/bundle')
+call pathogen#infect('~/.vim/bundle')
+call pathogen#helptags()
 
 " Add the syntax files and such
 set runtimepath+=~/.vim/syntax
