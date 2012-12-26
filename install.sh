@@ -2,9 +2,6 @@
 
 ## git submodules gives me all sorts of trouble ...
 ## the solution appears to be, blow all the dirs away and have git recreate it
-rm -r ./vim/bundle/vim-fugitive
-rm -r ./vim_runtime
-rm -r ./vim/bundle/taglist
 
 ## ensure all submodules are current and pulled in
 git submodule update --init --recursive
