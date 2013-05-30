@@ -117,6 +117,7 @@ if [[ "$(uname)" == "Linux" ]]; then
     # add the __git_ps1 command to PS1 
     man $(ls /usr/bin | shuf -n 1)| sed -n "/^NAME/ { n;p;q }"
 else
+    man $(ls /usr/bin/ | awk 'BEGIN { srand() } { l[NR]=$0 } END { print l[int(rand() * NR +1)] }') | sed -n "/^N/ { n;p;q; }"
     # brew bash completion:
     if [ -f `brew --prefix`/etc/bash_completion ]; then
       . `brew --prefix`/etc/bash_completion
@@ -185,7 +186,13 @@ function _complete_tt {
 }
 complete -F _complete_tt tt]
 
+doalarm () { perl -e 'alarm shift; exec @ARGV' "$@"; }
+
 ## add deploy to path
 homebrew=/usr/local/bin:/usr/local/sbin
 export PATH=$homebrew:$PATH
 export PATH=$PATH:/home/pwinters/workspace/deploy
+
+#Set vim mode
+set -o vi
+

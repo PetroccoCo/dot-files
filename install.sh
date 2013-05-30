@@ -7,6 +7,7 @@
 git submodule update --init --recursive
 
 ## move all files to .bak extenstions
+mv -v	~/.ackrc	~/.ackrc.bak
 mv -v	~/.bash_aliases	~/.bash_aliases.bak
 mv -v	~/.bash_logout	~/.bash_logout.bak
 mv -v	~/.bashrc   	~/.bashrc.bak
@@ -21,6 +22,7 @@ mv -v	~/.gitconfig	~/.gitconfig.bak
 mv -v	~/.git_template	~/.git_template.bak
 
 ## link all files to proper places
+ln	-vs	$PWD/ackrc	~/.ackrc
 ln	-vs	$PWD/bash_aliases	~/.bash_aliases
 ln	-vs	$PWD/bash_logout 	~/.bash_logout
 ln	-vs	$PWD/bashrc	~/.bashrc

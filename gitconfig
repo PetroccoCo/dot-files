@@ -145,7 +145,7 @@
 # }}}
 
 [merge]
-  ff = false
+  ff = true
   tool = vimdiff
   keepBackup = false
 [init]

@@ -13,10 +13,10 @@ alias less='less -R'
 
 ## VMWare fun
 alias turin-start='  "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion start   "/Users/pwinters/Documents/Virtual Machines.localized/Torino.vmwarevm/Torino.vmx"          nogui'
-alias modena-start=' "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion start   "/Users/pwinters/Documents/Virtual Machines.localized/Modena.vmwarevm/Debian 6 64-bit.vmx" nogui'
+alias genoa-start=' "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion start   "/Users/pwinters/Documents/Virtual Machines.localized/Genoa.vmwarevm/Genoa.vmx" nogui'
 alias w7-start='     "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion start   "/Users/pwinters/Documents/Virtual Machines.localized/Windows 7.vmwarevm/Windows 7.vmx"    '
 
 alias turin-stop='   "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion suspend "/Users/pwinters/Documents/Virtual Machines.localized/Torino.vmwarevm/Torino.vmx"          '
-alias modena-stop='  "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion suspend "/Users/pwinters/Documents/Virtual Machines.localized/Modena.vmwarevm/Debian 6 64-bit.vmx" '
+alias genoa-stop='  "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion suspend "/Users/pwinters/Documents/Virtual Machines.localized/Genoa.vmwarevm/Genoa.vmx" '
 alias w7-stop='      "/Applications/VMware Fusion.app/Contents/Library/vmrun" -T fusion suspend "/Users/pwinters/Documents/Virtual Machines.localized/Windows 7.vmwarevm/Windows 7.vmx"    '
 
